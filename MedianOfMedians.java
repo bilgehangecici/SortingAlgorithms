@@ -1,15 +1,17 @@
 import java.util.Collections;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.File;  // Import the File class
-import java.io.FileNotFoundException;  // Import this class to handle errors
+import java.io.File; // Import the File class
+import java.io.FileNotFoundException; // Import this class to handle errors
 import java.util.Scanner; // Import the Scanner class to read text files
 /* Name of the class has to be "Main" only if the class is public. */
+
 class MedianOfMedians {
 
 	static ArrayList<Integer> arrayList = new ArrayList<Integer>();
 
-	private static int getKthSmallestQuickSelectWorstCaseLinearTime(ArrayList<Integer> arrayList, int low, int high, int k) {
+	private static int getKthSmallestQuickSelectWorstCaseLinearTime(ArrayList<Integer> arrayList, int low, int high,
+			int k) {
 
 		if (k > 0 && k <= high - low + 1) {
 			// number of elements in array
@@ -19,7 +21,7 @@ class MedianOfMedians {
 			ArrayList<Integer> median = new ArrayList<Integer>();
 
 			for (i = 0; i < (n + 4) / 5 - 1; i++) {
-				median.add( getMedian(arrayList.subList(5 * i + low, 5 * i + low + 4), 5));
+				median.add(getMedian(arrayList.subList(5 * i + low, 5 * i + low + 4), 5));
 			}
 
 			if (n % 5 == 0) {
@@ -43,7 +45,8 @@ class MedianOfMedians {
 				return getKthSmallestQuickSelectWorstCaseLinearTime(arrayList, low, partition - 1, k);
 			}
 
-			return getKthSmallestQuickSelectWorstCaseLinearTime(arrayList, partition + 1, high, k - (partition + 1) + low);
+			return getKthSmallestQuickSelectWorstCaseLinearTime(arrayList, partition + 1, high,
+					k - (partition + 1) + low);
 		}
 
 		return -1;
@@ -112,10 +115,13 @@ class MedianOfMedians {
 	public static void main(String[] args) throws java.lang.Exception {
 
 		readFromFile("input.txt");
-        System.out.println("kth smallest in the given array is "
-                + getKthSmallestQuickSelectWorstCaseLinearTime(arrayList, 0, arrayList.size() - 1, 4));
-
-    printList(arrayList);
-    }
+		long startTime = System.nanoTime();
+		System.out.println("kth smallest in the given array is "
+				+ getKthSmallestQuickSelectWorstCaseLinearTime(arrayList, 0, arrayList.size() - 1, 3));
+		long endTime = System.nanoTime();
+		long totalTime = endTime - startTime;
+		printList(arrayList);
+		System.out.println("Total time in nanoseconds: " + totalTime);
+	}
 
 }
