@@ -1,97 +1,121 @@
-
-import java.util.Arrays;
-
+import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
+import java.io.File;  // Import the File class
+import java.io.FileNotFoundException;  // Import this class to handle errors
+import java.util.Scanner; // Import the Scanner class to read text files
 /* Name of the class has to be "Main" only if the class is public. */
 class MedianOfMedians {
 
-	private static int getKthSmallestQuickSelectWorstCaseLinearTime(int arr[], int low, int high, int k) {
+	static ArrayList<Integer> arrayList = new ArrayList<Integer>();
+
+	private static int getKthSmallestQuickSelectWorstCaseLinearTime(ArrayList<Integer> arrayList, int low, int high, int k) {
 
 		if (k > 0 && k <= high - low + 1) {
 			// number of elements in array
 			int n = high - low + 1;
 
-			int i, median[] = new int[(n + 4) / 5];
+			int i;
+			ArrayList<Integer> median = new ArrayList<Integer>();
 
-			for (i = 0; i < median.length - 1; i++) {
-				median[i] = getMedian(Arrays.copyOfRange(arr, 5 * i + low, 5 * i + low + 4), 5);
+			for (i = 0; i < (n + 4) / 5 - 1; i++) {
+				median.add( getMedian(arrayList.subList(5 * i + low, 5 * i + low + 4), 5));
 			}
 
 			if (n % 5 == 0) {
-				median[i] = getMedian(Arrays.copyOfRange(arr, 5 * i + low, 5 * i + low + 4), 5);
+				median.add(getMedian(arrayList.subList(5 * i + low, 5 * i + low + 4), 5));
 				i++;
 			} else {
-				median[i] = getMedian(Arrays.copyOfRange(arr, 5 * i + low, 5 * i + low + (n % 5)), n % 5);
+				median.add(getMedian(arrayList.subList(5 * i + low, 5 * i + low + (n % 5)), n % 5));
 				i++;
 			}
 
-			int medOfMed = i == 1 ? median[i - 1]
+			int medOfMed = i == 1 ? median.get(i - 1)
 					: getKthSmallestQuickSelectWorstCaseLinearTime(median, 0, i - 1, i / 2);
 
-			int partition = partitionPractise(arr, low, high, medOfMed);
+			int partition = partitionPractise(arrayList, low, high, medOfMed);
 
 			if (partition - low == k - 1) {
-				return arr[partition];
+				return arrayList.get(partition);
 			}
 
 			if (partition - low > k - 1) {
-				return getKthSmallestQuickSelectWorstCaseLinearTime(arr, low, partition - 1, k);
+				return getKthSmallestQuickSelectWorstCaseLinearTime(arrayList, low, partition - 1, k);
 			}
 
-			return getKthSmallestQuickSelectWorstCaseLinearTime(arr, partition + 1, high, k - (partition + 1) + low);
+			return getKthSmallestQuickSelectWorstCaseLinearTime(arrayList, partition + 1, high, k - (partition + 1) + low);
 		}
 
 		return -1;
 	}
 
-	private static int getMedian(int arr[], int n) {
-		Arrays.sort(arr);
-		return arr[n / 2];
+	private static int getMedian(List<Integer> List, int n) {
+		ArrayList<Integer> arrayList = new ArrayList<Integer>(List);
+		Collections.sort(arrayList);
+		return arrayList.get(n / 2);
 	}
 
-	private static void swap(int[] arr, int i, int index) {
-		if (arr[i] == arr[index]) {
+	private static void swap(ArrayList<Integer> arrayList, int i, int index) {
+		if (arrayList.get(i) == arrayList.get(index)) {
 			return;
 		}
-		int temp = arr[i];
-		arr[i] = arr[index];
-		arr[index] = temp;
+		int temp = arrayList.get(i);
+		arrayList.set(i, arrayList.get(index));
+		arrayList.set(index, temp);
 	}
 
-	private static int partitionPractise(int[] arr, int low, int high, int pivot) {
+	private static int partitionPractise(ArrayList<Integer> arrayList, int low, int high, int pivot) {
 
-		for (int i = 0; i < arr.length; i++) {
-			if (arr[i] == pivot) {
-				swap(arr, i, high);
+		for (int i = 0; i < arrayList.size(); i++) {
+			if (arrayList.get(i) == pivot) {
+				swap(arrayList, i, high);
 				break;
 			}
 		}
 		int index = low - 1;
 		int i = low;
 		while (i < high) {
-			if (arr[i] < pivot) {
+			if (arrayList.get(i) < pivot) {
 				index++;
-				swap(arr, i, index);
+				swap(arrayList, i, index);
 			}
 			i++;
 		}
 		index++;
-		swap(arr, index, high);
+		swap(arrayList, index, high);
 		return index;
 	}
 
-	static void printArray(int arr[]) {
-		int n = arr.length;
+	private static void printList(ArrayList<Integer> arrayList) {
+		int n = arrayList.size();
 		for (int i = 0; i < n; ++i)
-			System.out.print(arr[i] + " ");
+			System.out.print(arrayList.get(i) + " ");
+
 		System.out.println();
 	}
 
+	static void readFromFile(String fileName) {
+		try {
+			File myObj = new File(fileName);
+			Scanner myReader = new Scanner(myObj);
+			while (myReader.hasNext()) {
+				int data = myReader.nextInt();
+				arrayList.add(data);
+			}
+			myReader.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
+	}
+
 	public static void main(String[] args) throws java.lang.Exception {
-        int[] arr = new int[] { 7, 15, 4, 3, 20, 10 };
+
+		readFromFile("input.txt");
         System.out.println("kth smallest in the given array is "
-                + getKthSmallestQuickSelectWorstCaseLinearTime(arr, 0, arr.length - 1, 4));
-        
-              printArray(arr);
+                + getKthSmallestQuickSelectWorstCaseLinearTime(arrayList, 0, arrayList.size() - 1, 4));
+
+    printList(arrayList);
     }
 
 }
