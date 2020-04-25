@@ -15,20 +15,6 @@ public class MedianOfThree {
 	static int numSwaps = 0;
 	static int numComps = 0;
 
-	public static void main(String[] args) {
-
-    readFromFile("input.txt");
-
-		System.out.println("\n\n unsorted array:");
-		printList(arrayList);
-		System.out.println();
-		medianOfThree(arrayList, 0, arrayList.size()-1);
-		System.out.println("\n\n sorted array:");
-		printList(arrayList);
-
-		System.out.println("\n\tSwaps: " + numSwaps);
-		System.out.println("\tComparisons: " + numComps);
-	}
 
   static void readFromFile(String fileName) {
 		try {
@@ -145,4 +131,22 @@ public class MedianOfThree {
 		return i + 1;
 
 	}
+	public static void main(String[] args) {
+
+	    readFromFile("input.txt");
+
+			System.out.println("\n\n unsorted array:");
+			printList(arrayList);
+			System.out.println();
+			long startTime = System.nanoTime();
+			medianOfThree(arrayList, 0, arrayList.size()-1);
+			long endTime   = System.nanoTime();
+			long totalTime = endTime - startTime; 
+			System.out.println("\n\n sorted array:");
+			printList(arrayList);
+
+			System.out.println("\n\tSwaps: " + numSwaps);
+			System.out.println("\tComparisons: " + numComps);
+			System.out.println("Total time in nanoseconds: " + totalTime);
+		}
 }
