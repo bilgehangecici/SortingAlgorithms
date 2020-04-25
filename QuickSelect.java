@@ -47,6 +47,7 @@ class QuickSelect {
 	// ASSUMPTION: all elements in arr[] are distinct
 	public static int kthSmallest(ArrayList<Integer> list, int low, int high, int k) {
 		// find the partition
+		counter++;
 		int partition = partition(list, low, high);
 
 		// if partition value is equal to the kth position,
@@ -64,7 +65,7 @@ class QuickSelect {
 		else
 			return kthSmallest(list, low, partition - 1, k);
 
-    counter++;
+    
 	}
 
 	static void printList(ArrayList<Integer> list) {
