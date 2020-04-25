@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 
 class InsertionSort {
+	
+	static ArrayList<Integer> arrayList = new ArrayList<Integer>();
+	
 	/* Function to sort array using insertion sort */
 	private void sort(ArrayList<Integer> arrayList) {
 		int n = arrayList.size();
