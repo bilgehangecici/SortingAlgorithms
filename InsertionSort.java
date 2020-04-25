@@ -6,6 +6,7 @@ import java.util.Scanner; // Import the Scanner class to read text files
 class InsertionSort {
 
   static ArrayList<Integer> arrayList = new ArrayList<Integer>();
+  static int counter = 0;
 
 	/* Function to sort array using insertion sort */
 	private void sort(ArrayList<Integer> arrayList) {
@@ -23,8 +24,10 @@ class InsertionSort {
 				arrayList.set(j + 1, arrayList.get(j));
 
 				j = j - 1;
+        counter++;
 			}
 			arrayList.set(j + 1, key);
+      counter++;
 		}
 	}
 
@@ -63,7 +66,7 @@ class InsertionSort {
 		long startTime = System.nanoTime();
 		ob.sort(arrayList);
 		long endTime   = System.nanoTime();
-		long totalTime = endTime - startTime; 
+		long totalTime = endTime - startTime;
 		int number = arrayList.get((int) Math.ceil(arrayList.size() / 2));
 		System.out.println("\nSorted array");
 		printArray(arrayList);
