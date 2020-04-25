@@ -74,12 +74,6 @@ class MergeSort {
 	}
 
 	/* A utility function to print array of size n */
-	static void printArray(int arr[]) {
-		int n = arr.length;
-		for (int i = 0; i < n; ++i)
-			System.out.print(arr[i] + " ");
-		System.out.println();
-	}
 
 	static void printList(ArrayList<Integer> list){
 		int n = list.size();
@@ -87,7 +81,7 @@ class MergeSort {
 			System.out.print(list.get(i) + " ");
 		System.out.println();
 	}
-
+       
 	static void readFromFile(String fileName) {
 		try {
       File myObj = new File(fileName);
@@ -107,12 +101,16 @@ class MergeSort {
 	public static void main(String args[]) {
 		readFromFile("input.txt");
 		MergeSort ob = new MergeSort();
+		long startTime = System.nanoTime();
 		ob.sort(list, 0, list.size() - 1);
+		long endTime   = System.nanoTime();
+		long totalTime = endTime - startTime; 
 
-		System.out.println("\nMiddle element: " + list.get((int) Math.ceil(list.size() / 2)));
+		System.out.println("Middle element: " + list.get((int) Math.ceil(list.size() / 2)));
 
 		System.out.println("\nSorted array");
 		printList(list);
+		System.out.println("Total time in nanoseconds: " + totalTime);
 
 
 	}
