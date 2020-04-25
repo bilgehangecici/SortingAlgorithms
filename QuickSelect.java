@@ -1,5 +1,5 @@
 
-// Java program of Quick Select 
+// Java program of Quick Select
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -16,6 +16,7 @@ class QuickSelect {
 	// the pivot position to its respective position
 	// in the final array.
 	static ArrayList<Integer> arrayList = new ArrayList<Integer>();
+  static int counter = 0;
 
 	public static int partition(ArrayList<Integer> list, int low, int high) {
 		int i = low + 1;
@@ -30,7 +31,9 @@ class QuickSelect {
 
 				Collections.swap(list, i, j);
 				i += 1;
+        counter++;
 			}
+      counter++;
 		}
 		Collections.swap(list, low, i - 1); // put the pivot element in its proper place.
 
@@ -60,6 +63,8 @@ class QuickSelect {
 		// search left side of the array.
 		else
 			return kthSmallest(list, low, partition - 1, k);
+
+    counter++;
 	}
 
 	static void printList(ArrayList<Integer> list) {
@@ -92,7 +97,7 @@ class QuickSelect {
 
 		int kPosition = 3;
 		int length = arrayList.size();
-		
+
 		long startTime = System.nanoTime();
 		if (kPosition > length) {
 			System.out.println("Index out of bound");
@@ -104,8 +109,9 @@ class QuickSelect {
 			System.out.println("After the partition: " + arrayList);
 		}
 		long endTime   = System.nanoTime();
-		long totalTime = endTime - startTime; 
+		long totalTime = endTime - startTime;
 		System.out.println("Total time in nanoseconds: " + totalTime);
-		
+    System.out.println("Counter: " + counter);
+
 	}
 }
