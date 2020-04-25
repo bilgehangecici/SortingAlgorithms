@@ -92,7 +92,8 @@ class QuickSelect {
 
 		int kPosition = 3;
 		int length = arrayList.size();
-
+		
+		long startTime = System.nanoTime();
 		if (kPosition > length) {
 			System.out.println("Index out of bound");
 		} else {
@@ -102,5 +103,9 @@ class QuickSelect {
 
 			System.out.println("After the partition: " + arrayList);
 		}
+		long endTime   = System.nanoTime();
+		long totalTime = endTime - startTime; 
+		System.out.println("Total time in nanoseconds: " + totalTime);
+		
 	}
 }
