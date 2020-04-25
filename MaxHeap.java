@@ -1,5 +1,9 @@
+import java.io.File;  // Import the File class
+import java.io.FileNotFoundException;  // Import this class to handle errors
+import java.util.Scanner; // Import the Scanner class to read text files
 
 public class MaxHeap {
+	static MaxHeap maxHeap = new MaxHeap(1000000);
 	private int[] Heap;
 	private int size;
 	private int maxsize;
@@ -92,18 +96,26 @@ public class MaxHeap {
 		return popped;
 	}
 
+	static void readFromFile(String fileName) {
+		try {
+			File myObj = new File(fileName);
+			Scanner myReader = new Scanner(myObj);
+			while (myReader.hasNext()) {
+				int data = myReader.nextInt();
+				maxHeap.insert(data);
+			}
+			myReader.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
+	}
+
 	public static void main(String[] arg) {
+
+		readFromFile("input.txt");
+
 		System.out.println("The Max Heap is ");
-		MaxHeap maxHeap = new MaxHeap(15);
-		maxHeap.insert(5);
-		maxHeap.insert(3);
-		maxHeap.insert(17);
-		maxHeap.insert(10);
-		maxHeap.insert(84);
-		maxHeap.insert(19);
-		maxHeap.insert(6);
-		maxHeap.insert(22);
-		maxHeap.insert(9);
 
 		int number = (int) Math.floor(maxHeap.size / 2);
 		for (int i = 0; i < number; i++) {
@@ -116,4 +128,3 @@ public class MaxHeap {
 		 System.out.println("The max val is " + maxHeap.extractMax());
 	}
 }
-
