@@ -71,6 +71,8 @@ class InsertionSort {
 		System.out.println("\nSorted array");
 		printArray(arrayList);
 		System.out.println("\nMiddle element: " + number);
+		System.out.println();
 		System.out.println("Total time in nanoseconds: " + totalTime);
+		System.out.println("Counter: " + counter);
 	}
 } /* This code is contributed by Rajat Mishra. */
