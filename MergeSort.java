@@ -6,6 +6,7 @@ import java.util.ArrayList;
 class MergeSort {
 
 	static ArrayList<Integer> list = new ArrayList<Integer>();
+	static int counter = 0;
 	// Merges two subarrays of arr[].
 	// First subarray is arr[l..m]
 	// Second subarray is arr[m+1..r]
@@ -24,6 +25,8 @@ class MergeSort {
 		for (int j = 0; j < n2; ++j)
 			R[j] = list.get(m + 1 + j);
 
+		counter += n1 + n2;
+
 		/* Merge the temp arrays */
 
 		// Initial indexes of first and second subarrays
@@ -40,6 +43,7 @@ class MergeSort {
 				j++;
 			}
 			k++;
+			counter++;
 		}
 
 		/* Copy remaining elements of L[] if any */
@@ -47,6 +51,7 @@ class MergeSort {
 			list.set(k, L[i]);
 			i++;
 			k++;
+			counter++;
 		}
 
 		/* Copy remaining elements of R[] if any */
@@ -54,6 +59,7 @@ class MergeSort {
 			list.set(k, R[j]);
 			j++;
 			k++;
+			counter++;
 		}
 	}
 
@@ -70,6 +76,7 @@ class MergeSort {
 
 			// Merge the sorted halves
 			merge(list, l, m, r);
+			counter++;
 		}
 	}
 
@@ -81,7 +88,7 @@ class MergeSort {
 			System.out.print(list.get(i) + " ");
 		System.out.println();
 	}
-       
+
 	static void readFromFile(String fileName) {
 		try {
       File myObj = new File(fileName);
@@ -104,14 +111,14 @@ class MergeSort {
 		long startTime = System.nanoTime();
 		ob.sort(list, 0, list.size() - 1);
 		long endTime   = System.nanoTime();
-		long totalTime = endTime - startTime; 
+		long totalTime = endTime - startTime;
 
 		System.out.println("Middle element: " + list.get((int) Math.ceil(list.size() / 2)));
 
 		System.out.println("\nSorted array");
 		printList(list);
 		System.out.println("Total time in nanoseconds: " + totalTime);
-
+		System.out.println("Counter: " + counter);
 
 	}
 }
