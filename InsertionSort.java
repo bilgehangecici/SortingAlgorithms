@@ -60,10 +60,14 @@ class InsertionSort {
 		System.out.println("Given Array");
 		printArray(arrayList);
 		InsertionSort ob = new InsertionSort();
+		long startTime = System.nanoTime();
 		ob.sort(arrayList);
+		long endTime   = System.nanoTime();
+		long totalTime = endTime - startTime; 
 		int number = arrayList.get((int) Math.ceil(arrayList.size() / 2));
 		System.out.println("\nSorted array");
 		printArray(arrayList);
 		System.out.println("\nMiddle element: " + number);
+		System.out.println("Total time in nanoseconds: " + totalTime);
 	}
 } /* This code is contributed by Rajat Mishra. */
