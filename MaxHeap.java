@@ -7,6 +7,7 @@ public class MaxHeap {
 	private int[] Heap;
 	private int size;
 	private int maxsize;
+	static int counter = 0;
 
 	// Constructor to initialize an
 	// empty max heap with given maximum
@@ -36,6 +37,7 @@ public class MaxHeap {
 	// Returns true of given node is leaf
 	private boolean isLeaf(int pos) {
 		if (pos >= (size / 2) && pos <= size) {
+			counter++;
 			return true;
 		}
 		return false;
@@ -61,10 +63,13 @@ public class MaxHeap {
 			if (Heap[leftChild(pos)] > Heap[rightChild(pos)]) {
 				swap(pos, leftChild(pos));
 				maxHeapify(leftChild(pos));
+				counter++;
 			} else {
 				swap(pos, rightChild(pos));
 				maxHeapify(rightChild(pos));
+				counter++;
 			}
+			counter++;
 		}
 	}
 
@@ -77,6 +82,7 @@ public class MaxHeap {
 		while (Heap[current] > Heap[parent(current)]) {
 			swap(current, parent(current));
 			current = parent(current);
+			counter++;
 		}
 	}
 
@@ -121,12 +127,13 @@ public class MaxHeap {
 
 			//System.out.println("The max val is " + maxHeap.extractMax());
 			maxHeap.extractMax();
+			counter++;
 		}
 
 		//maxHeap.print();
 		 System.out.println("The max val is " + maxHeap.extractMax());
 		 long endTime   = System.nanoTime();
-		 long totalTime = endTime - startTime; 
+		 long totalTime = endTime - startTime;
 		 System.out.println("Total time in nanoseconds: " + totalTime);
 	}
 }
