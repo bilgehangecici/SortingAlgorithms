@@ -135,5 +135,6 @@ public class MaxHeap {
 		 long endTime   = System.nanoTime();
 		 long totalTime = endTime - startTime;
 		 System.out.println("Total time in nanoseconds: " + totalTime);
+		 System.out.println("Counter: " + counter);
 	}
 }
