@@ -1,29 +1,32 @@
+import java.util.ArrayList;
 
-  class InsertionSort {
+class InsertionSort {
 	/* Function to sort array using insertion sort */
-	 private void sort(int arr[]) {
-		int n = arr.length;
+	private void sort(ArrayList<Integer> arrayList) {
+		int n = arrayList.size();
 		for (int i = 1; i < n; ++i) {
-			int key = arr[i];
+			int key = arrayList.get(i);
 			int j = i - 1;
 
 			/*
 			 * Move elements of arr[0..i-1], that are greater than key, to one position
 			 * ahead of their current position
 			 */
-			while (j >= 0 && arr[j] > key) {
-				arr[j + 1] = arr[j];
+			while (j >= 0 && arrayList.get(j) > key) {
+
+				arrayList.set(j + 1, arrayList.get(j));
+
 				j = j - 1;
 			}
-			arr[j + 1] = key;
+			arrayList.set(j + 1, key);
 		}
 	}
 
 	/* A utility function to print array of size n */
-	 private static void printArray(int arr[]) {
-		int n = arr.length;
+	private static void printArray(ArrayList<Integer> arrayList) {
+		int n = arrayList.size();
 		for (int i = 0; i < n; ++i)
-			System.out.print(arr[i] + " ");
+			System.out.print(arrayList.get(i) + " ");
 
 		System.out.println();
 	}
@@ -31,14 +34,23 @@
 	// Driver method
 	public static void main(String args[]) {
 
-		int arr[] = { 12, 11, 13, 5, 6, 9, 15, 23,};
-        
+		ArrayList<Integer> arrayList = new ArrayList<Integer>();
+
+		arrayList.add(12);
+		arrayList.add(11);
+		arrayList.add(13);
+		arrayList.add(5);
+		arrayList.add(6);
+		arrayList.add(9);
+		arrayList.add(15);
+		arrayList.add(23);
 		System.out.println("Given Array");
-		printArray(arr);
+		printArray(arrayList);
 		InsertionSort ob = new InsertionSort();
-		ob.sort(arr);
-		System.out.println("\nMiddle element: " + arr[(int) Math.ceil(arr.length / 2)]);
+		ob.sort(arrayList);
+		int number = arrayList.get((int) Math.ceil(arrayList.size() / 2));
+		System.out.println("\nMiddle element: " + number);
 		System.out.println("\nSorted array");
-		printArray(arr);
+		printArray(arrayList);
 	}
 } /* This code is contributed by Rajat Mishra. */
