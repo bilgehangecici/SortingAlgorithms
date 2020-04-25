@@ -1,9 +1,12 @@
 import java.util.ArrayList;
+import java.io.File;  // Import the File class
+import java.io.FileNotFoundException;  // Import this class to handle errors
+import java.util.Scanner; // Import the Scanner class to read text files
 
 class InsertionSort {
-	
-	static ArrayList<Integer> arrayList = new ArrayList<Integer>();
-	
+
+  static ArrayList<Integer> arrayList = new ArrayList<Integer>();
+
 	/* Function to sort array using insertion sort */
 	private void sort(ArrayList<Integer> arrayList) {
 		int n = arrayList.size();
@@ -34,19 +37,26 @@ class InsertionSort {
 		System.out.println();
 	}
 
+  static void readFromFile(String fileName) {
+    try {
+      File myObj = new File(fileName);
+      Scanner myReader = new Scanner(myObj);
+      while (myReader.hasNext()) {
+        int data = myReader.nextInt();
+        arrayList.add(data);
+      }
+      myReader.close();
+    } catch (FileNotFoundException e) {
+      System.out.println("An error occurred.");
+      e.printStackTrace();
+    }
+  }
+
 	// Driver method
 	public static void main(String args[]) {
 
-		ArrayList<Integer> arrayList = new ArrayList<Integer>();
+    readFromFile("input.txt");
 
-		arrayList.add(12);
-		arrayList.add(11);
-		arrayList.add(13);
-		arrayList.add(5);
-		arrayList.add(6);
-		arrayList.add(9);
-		arrayList.add(15);
-		arrayList.add(23);
 		System.out.println("Given Array");
 		printArray(arrayList);
 		InsertionSort ob = new InsertionSort();
