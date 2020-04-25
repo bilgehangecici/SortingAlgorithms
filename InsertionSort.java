@@ -49,8 +49,8 @@ class InsertionSort {
 		InsertionSort ob = new InsertionSort();
 		ob.sort(arrayList);
 		int number = arrayList.get((int) Math.ceil(arrayList.size() / 2));
-		System.out.println("\nMiddle element: " + number);
 		System.out.println("\nSorted array");
 		printArray(arrayList);
+		System.out.println("\nMiddle element: " + number);
 	}
 } /* This code is contributed by Rajat Mishra. */
