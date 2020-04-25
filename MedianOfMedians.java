@@ -9,6 +9,7 @@ import java.util.Scanner; // Import the Scanner class to read text files
 class MedianOfMedians {
 
 	static ArrayList<Integer> arrayList = new ArrayList<Integer>();
+	static int counter = 0;
 
 	private static int getKthSmallestQuickSelectWorstCaseLinearTime(ArrayList<Integer> arrayList, int low, int high,
 			int k) {
@@ -22,14 +23,17 @@ class MedianOfMedians {
 
 			for (i = 0; i < (n + 4) / 5 - 1; i++) {
 				median.add(getMedian(arrayList.subList(5 * i + low, 5 * i + low + 4), 5));
+				counter++;
 			}
 
 			if (n % 5 == 0) {
 				median.add(getMedian(arrayList.subList(5 * i + low, 5 * i + low + 4), 5));
 				i++;
+				counter++;
 			} else {
 				median.add(getMedian(arrayList.subList(5 * i + low, 5 * i + low + (n % 5)), n % 5));
 				i++;
+				counter++;
 			}
 
 			int medOfMed = i == 1 ? median.get(i - 1)
@@ -39,20 +43,23 @@ class MedianOfMedians {
 
 			if (partition - low == k - 1) {
 				return arrayList.get(partition);
+				counter++;
 			}
 
 			if (partition - low > k - 1) {
 				return getKthSmallestQuickSelectWorstCaseLinearTime(arrayList, low, partition - 1, k);
+				counter++;
 			}
 
 			return getKthSmallestQuickSelectWorstCaseLinearTime(arrayList, partition + 1, high,
 					k - (partition + 1) + low);
 		}
-
+		counter++;
 		return -1;
 	}
 
 	private static int getMedian(List<Integer> List, int n) {
+		counter++;
 		ArrayList<Integer> arrayList = new ArrayList<Integer>(List);
 		Collections.sort(arrayList);
 		return arrayList.get(n / 2);
@@ -65,6 +72,7 @@ class MedianOfMedians {
 		int temp = arrayList.get(i);
 		arrayList.set(i, arrayList.get(index));
 		arrayList.set(index, temp);
+		counter++;
 	}
 
 	private static int partitionPractise(ArrayList<Integer> arrayList, int low, int high, int pivot) {
@@ -74,6 +82,7 @@ class MedianOfMedians {
 				swap(arrayList, i, high);
 				break;
 			}
+			counter++;
 		}
 		int index = low - 1;
 		int i = low;
@@ -83,8 +92,10 @@ class MedianOfMedians {
 				swap(arrayList, i, index);
 			}
 			i++;
+			counter++;
 		}
 		index++;
+		counter++;
 		swap(arrayList, index, high);
 		return index;
 	}
@@ -122,6 +133,8 @@ class MedianOfMedians {
 		long totalTime = endTime - startTime;
 		printList(arrayList);
 		System.out.println("Total time in nanoseconds: " + totalTime);
+		System.out.println("Counter: " + counter);
+
 	}
 
 }
