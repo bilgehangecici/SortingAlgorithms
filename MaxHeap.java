@@ -115,16 +115,18 @@ public class MaxHeap {
 
 		readFromFile("input.txt");
 
-		System.out.println("The Max Heap is ");
-
 		int number = (int) Math.floor(maxHeap.size / 2);
+		long startTime = System.nanoTime();
 		for (int i = 0; i < number; i++) {
 
 			//System.out.println("The max val is " + maxHeap.extractMax());
 			maxHeap.extractMax();
 		}
 
-		maxHeap.print();
+		//maxHeap.print();
 		 System.out.println("The max val is " + maxHeap.extractMax());
+		 long endTime   = System.nanoTime();
+		 long totalTime = endTime - startTime; 
+		 System.out.println("Total time in nanoseconds: " + totalTime);
 	}
 }
