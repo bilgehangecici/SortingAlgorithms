@@ -12,20 +12,12 @@ public class MedianOfThree {
 
   static ArrayList<Integer> arrayList = new ArrayList<Integer>();
 
-	public static int n = 16;// Controls size of array
 	static int numSwaps = 0;
 	static int numComps = 0;
 
 	public static void main(String[] args) {
 
     readFromFile("input.txt");
-    		// int arr[] = {-3, 9, 6, 11, 4};
-		int arr[] = new int[n];
-		int n = arr.length - 1;
-		Random rand = new Random();
-		for (int i = 0; i < arr.length; i++) {
-			arr[i] = rand.nextInt(100);
-		}
 
 		System.out.println("\n\n unsorted array:");
 		printList(arrayList);
