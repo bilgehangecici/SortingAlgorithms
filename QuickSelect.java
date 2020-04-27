@@ -33,11 +33,10 @@ class QuickSelect {
 				i += 1;
         counter++;
 			}
-      counter++;
 		}
 		Collections.swap(list, low, i - 1); // put the pivot element in its proper place.
 
-		return i - 1; // return the position of the pivot
+		return i-1; // return the position of the pivot
 	}
 
 	// finds the kth position (of the sorted array)
@@ -47,13 +46,15 @@ class QuickSelect {
 	// ASSUMPTION: all elements in arr[] are distinct
 	public static int kthSmallest(ArrayList<Integer> list, int low, int high, int k) {
 		// find the partition
-		counter++;
+		 counter++;
 		int partition = partition(list, low, high);
 
 		// if partition value is equal to the kth position,
 		// return value at k.
-		if (partition == k)
+		if (partition == k) {
 			return list.get(partition);
+		}
+			
 
 		// if partition value is less than kth position,
 		// search right side of the array.
@@ -65,7 +66,7 @@ class QuickSelect {
 		else
 			return kthSmallest(list, low, partition - 1, k);
 
-    
+   
 	}
 
 	static void printList(ArrayList<Integer> list) {
@@ -94,10 +95,12 @@ class QuickSelect {
 	// Driver Code
 	public static void main(String[] args) {
 
-		readFromFile("input.txt");
+		readFromFile("Cases/worstCase4.txt");
 
-		int kPosition = 3;
+		
 		int length = arrayList.size();
+		
+		int kPosition = (int) Math.ceil(arrayList.size() / 2);
 
 		long startTime = System.nanoTime();
 		if (kPosition > length) {
