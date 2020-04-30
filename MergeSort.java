@@ -25,7 +25,8 @@ class MergeSort {
 		for (int j = 0; j < n2; ++j)
 			R[j] = list.get(m + 1 + j);
 
-		counter += n1 + n2;
+		//counter += n1 + n2;
+		//counterSpace += n1 + n2;
 
 		/* Merge the temp arrays */
 
@@ -35,23 +36,25 @@ class MergeSort {
 		// Initial index of merged subarry array
 		int k = l;
 		while (i < n1 && j < n2) {
+			counter += 2;
 			if (L[i] <= R[j]) {
+				counter += 1;
 				list.set(k, L[i]);
 				i++;
 			} else {
+				counter+= 1;
 				list.set(k, R[j]);
 				j++;
 			}
 			k++;
-			counter++;
 		}
 
 		/* Copy remaining elements of L[] if any */
 		while (i < n1) {
+			counter+= 1;
 			list.set(k, L[i]);
 			i++;
 			k++;
-			counter++;
 		}
 
 		/* Copy remaining elements of R[] if any */
@@ -68,6 +71,7 @@ class MergeSort {
 	void sort(ArrayList<Integer> list, int l, int r) {
 		if (l < r) {
 			// Find the middle point
+			counter+= 1;
 			int m = (l + r) / 2;
 
 			// Sort first and second halves
@@ -76,7 +80,6 @@ class MergeSort {
 
 			// Merge the sorted halves
 			merge(list, l, m, r);
-			counter++;
 		}
 	}
 
@@ -106,20 +109,18 @@ class MergeSort {
 
 	// Driver method
 	public static void main(String args[]) {
-		readFromFile("input.txt");
+		readFromFile("Cases/averageCase4.txt");
 		MergeSort ob = new MergeSort();
 		long startTime = System.nanoTime();
 		ob.sort(list, 0, list.size() - 1);
 		long endTime   = System.nanoTime();
 		long totalTime = endTime - startTime;
 
-		System.out.println("Middle element: " + list.get((int) Math.ceil(list.size() / 2)));
+		System.out.println("Middle element: " + list.get((int) Math.ceil(list.size() / 2.0)));
 
-		System.out.println("\nSorted array");
-		printList(list);
 		System.out.println("Total time in nanoseconds: " + totalTime);
 		System.out.println("Counter: " + counter);
 
 	}
 }
-/* This code is contributed by Rajat Mishra */
+
