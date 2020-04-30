@@ -1,11 +1,10 @@
 
-// Java program of Quick Select
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
-import java.util.stream.Collectors;
+
 
 class QuickSelect {
 
@@ -31,7 +30,7 @@ class QuickSelect {
 
 				Collections.swap(list, i, j);
 				i += 1;
-        counter++;
+        //counter++;
 			}
 		}
 		Collections.swap(list, low, i - 1); // put the pivot element in its proper place.
@@ -95,12 +94,12 @@ class QuickSelect {
 	// Driver Code
 	public static void main(String[] args) {
 
-		readFromFile("Cases/worstCase4.txt");
+		readFromFile("Cases/bestCase1.txt");
 
 		
 		int length = arrayList.size();
 		
-		int kPosition = (int) Math.ceil(arrayList.size() / 2);
+		int kPosition = (int) Math.ceil(arrayList.size() / 2.0);
 
 		long startTime = System.nanoTime();
 		if (kPosition > length) {
