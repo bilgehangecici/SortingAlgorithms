@@ -79,11 +79,13 @@ public class QucikSelectMedianOfThree {
 		while (true) {
 			// find bigger
 			while (arrayList.get(++leftPtr) < pivot)
+				counter++;
 				;
 			// find smaller
 			while (arrayList.get(--rightPtr) > pivot)
-
+               counter++;
 				;
+				
 			if (leftPtr >= rightPtr) // if pointers cross, partition done
 				break;
 			else
@@ -119,7 +121,7 @@ public class QucikSelectMedianOfThree {
 	// Driver Code
 	public static void main(String[] args) {
 
-		readFromFile("Cases/bestCase1.txt");
+		readFromFile(".\\Cases\\worstCase3.txt");
 
 		int length = arrayList.size();
 
