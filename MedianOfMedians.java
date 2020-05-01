@@ -9,11 +9,12 @@ import java.util.Scanner; // Import the Scanner class to read text files
 class MedianOfMedians {
 
 	static ArrayList<Integer> arrayList = new ArrayList<Integer>();
-	static int counter = 0;
+	 static int counter = 0; 
 
 	private static int getKthSmallestQuickSelectWorstCaseLinearTime(ArrayList<Integer> arrayList, int low, int high,
 			int k) {
-
+		
+		counter++;
 		if (k > 0 && k <= high - low + 1) {
 			// number of elements in array
 			int n = high - low + 1;
@@ -23,17 +24,17 @@ class MedianOfMedians {
 
 			for (i = 0; i < (n + 4) / 5 - 1; i++) {
 				median.add(getMedian(arrayList.subList(5 * i + low, 5 * i + low + 4), 5));
-				counter++;
+				
 			}
 
 			if (n % 5 == 0) {
 				median.add(getMedian(arrayList.subList(5 * i + low, 5 * i + low + 4), 5));
 				i++;
-				counter++;
+				
 			} else {
 				median.add(getMedian(arrayList.subList(5 * i + low, 5 * i + low + (n % 5)), n % 5));
 				i++;
-				counter++;
+				
 			}
 
 			int medOfMed = i == 1 ? median.get(i - 1)
@@ -42,19 +43,20 @@ class MedianOfMedians {
 			int partition = partitionPractise(arrayList, low, high, medOfMed);
 
 			if (partition - low == k - 1) {
+				
 				return arrayList.get(partition);
-				counter++;
+				
 			}
 
 			if (partition - low > k - 1) {
+				
 				return getKthSmallestQuickSelectWorstCaseLinearTime(arrayList, low, partition - 1, k);
-				counter++;
 			}
 
 			return getKthSmallestQuickSelectWorstCaseLinearTime(arrayList, partition + 1, high,
 					k - (partition + 1) + low);
 		}
-		counter++;
+		
 		return -1;
 	}
 
@@ -72,17 +74,16 @@ class MedianOfMedians {
 		int temp = arrayList.get(i);
 		arrayList.set(i, arrayList.get(index));
 		arrayList.set(index, temp);
-		counter++;
 	}
 
 	private static int partitionPractise(ArrayList<Integer> arrayList, int low, int high, int pivot) {
-
+        counter++;
 		for (int i = 0; i < arrayList.size(); i++) {
 			if (arrayList.get(i) == pivot) {
 				swap(arrayList, i, high);
 				break;
 			}
-			counter++;
+			
 		}
 		int index = low - 1;
 		int i = low;
@@ -92,10 +93,9 @@ class MedianOfMedians {
 				swap(arrayList, i, index);
 			}
 			i++;
-			counter++;
+			
 		}
 		index++;
-		counter++;
 		swap(arrayList, index, high);
 		return index;
 	}
@@ -125,13 +125,13 @@ class MedianOfMedians {
 
 	public static void main(String[] args) throws java.lang.Exception {
 
-		readFromFile("input.txt");
+		readFromFile("Cases/bestCase1.txt");
 		long startTime = System.nanoTime();
+		int kPosition = (int) Math.ceil(arrayList.size() / 2.0);
 		System.out.println("kth smallest in the given array is "
-				+ getKthSmallestQuickSelectWorstCaseLinearTime(arrayList, 0, arrayList.size() - 1, 3));
+				+ getKthSmallestQuickSelectWorstCaseLinearTime(arrayList, 0, arrayList.size() - 1, kPosition));
 		long endTime = System.nanoTime();
 		long totalTime = endTime - startTime;
-		printList(arrayList);
 		System.out.println("Total time in nanoseconds: " + totalTime);
 		System.out.println("Counter: " + counter);
 
