@@ -1,5 +1,5 @@
-import java.io.File;  // Import the File class
-import java.io.FileNotFoundException;  // Import this class to handle errors
+import java.io.File; // Import the File class
+import java.io.FileNotFoundException; // Import this class to handle errors
 import java.util.Scanner; // Import the Scanner class to read text files
 
 public class MaxHeap {
@@ -27,6 +27,7 @@ public class MaxHeap {
 	// Below two functions return left and
 	// right children.
 	private int leftChild(int pos) {
+		
 		return (2 * pos);
 	}
 
@@ -48,6 +49,7 @@ public class MaxHeap {
 		tmp = Heap[fpos];
 		Heap[fpos] = Heap[spos];
 		Heap[spos] = tmp;
+		counter++;
 	}
 
 	// A recursive function to max heapify the given
@@ -86,13 +88,6 @@ public class MaxHeap {
 		}
 	}
 
-	public void print() {
-		for (int i = 1; i <= size / 2; i++) {
-			System.out.print(
-					" PARENT : " + Heap[i] + " LEFT CHILD : " + Heap[2 * i] + " RIGHT CHILD :" + Heap[2 * i + 1]);
-			System.out.println();
-		}
-	}
 
 	// Remove an element from max heap
 	public int extractMax() {
@@ -119,22 +114,22 @@ public class MaxHeap {
 
 	public static void main(String[] arg) {
 
-		readFromFile("input.txt");
+		readFromFile("Cases/worstCase6.txt");
 
-		int number = (int) Math.floor(maxHeap.size / 2);
+		int number = (int) Math.floor(maxHeap.size / 2.0);
 		long startTime = System.nanoTime();
 		for (int i = 0; i < number; i++) {
 
-			//System.out.println("The max val is " + maxHeap.extractMax());
+			// System.out.println("The max val is " + maxHeap.extractMax());
 			maxHeap.extractMax();
 			counter++;
 		}
 
-		//maxHeap.print();
-		 System.out.println("The max val is " + maxHeap.extractMax());
-		 long endTime   = System.nanoTime();
-		 long totalTime = endTime - startTime;
-		 System.out.println("Total time in nanoseconds: " + totalTime);
-		 System.out.println("Counter: " + counter);
+		// maxHeap.print();
+		System.out.println("The max val is " + maxHeap.extractMax());
+		long endTime = System.nanoTime();
+		long totalTime = endTime - startTime;
+		System.out.println("Total time in nanoseconds: " + totalTime);
+		System.out.println("Counter: " + counter);
 	}
 }
