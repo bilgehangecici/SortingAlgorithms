@@ -1,5 +1,5 @@
-import java.io.File;  // Import the File class
-import java.io.FileNotFoundException;  // Import this class to handle errors
+import java.io.File; // Import the File class
+import java.io.FileNotFoundException; // Import this class to handle errors
 import java.util.Scanner; // Import the Scanner class to read text files
 import java.util.ArrayList;
 
@@ -7,6 +7,8 @@ class MergeSort {
 
 	static ArrayList<Integer> list = new ArrayList<Integer>();
 	static int counter = 0;
+	static int counterSpace = 0;
+
 	// Merges two subarrays of arr[].
 	// First subarray is arr[l..m]
 	// Second subarray is arr[m+1..r]
@@ -25,9 +27,6 @@ class MergeSort {
 		for (int j = 0; j < n2; ++j)
 			R[j] = list.get(m + 1 + j);
 
-		//counter += n1 + n2;
-		//counterSpace += n1 + n2;
-
 		/* Merge the temp arrays */
 
 		// Initial indexes of first and second subarrays
@@ -42,7 +41,7 @@ class MergeSort {
 				list.set(k, L[i]);
 				i++;
 			} else {
-				counter+= 1;
+				counter += 1;
 				list.set(k, R[j]);
 				j++;
 			}
@@ -51,7 +50,7 @@ class MergeSort {
 
 		/* Copy remaining elements of L[] if any */
 		while (i < n1) {
-			counter+= 1;
+			counter += 1;
 			list.set(k, L[i]);
 			i++;
 			k++;
@@ -71,7 +70,7 @@ class MergeSort {
 	void sort(ArrayList<Integer> list, int l, int r) {
 		if (l < r) {
 			// Find the middle point
-			counter+= 1;
+			counter += 1;
 			int m = (l + r) / 2;
 
 			// Sort first and second halves
@@ -85,7 +84,7 @@ class MergeSort {
 
 	/* A utility function to print array of size n */
 
-	static void printList(ArrayList<Integer> list){
+	static void printList(ArrayList<Integer> list) {
 		int n = list.size();
 		for (int i = 0; i < n; ++i)
 			System.out.print(list.get(i) + " ");
@@ -94,26 +93,26 @@ class MergeSort {
 
 	static void readFromFile(String fileName) {
 		try {
-      File myObj = new File(fileName);
-      Scanner myReader = new Scanner(myObj);
-      while (myReader.hasNext()) {
-        int data = myReader.nextInt();
+			File myObj = new File(fileName);
+			Scanner myReader = new Scanner(myObj);
+			while (myReader.hasNext()) {
+				int data = myReader.nextInt();
 				list.add(data);
-      }
-      myReader.close();
-    } catch (FileNotFoundException e) {
-      System.out.println("An error occurred.");
-      e.printStackTrace();
-    }
+			}
+			myReader.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
 	}
 
 	// Driver method
 	public static void main(String args[]) {
-		readFromFile("Cases/averageCase4.txt");
+		readFromFile("Cases/worstCase1.txt");
 		MergeSort ob = new MergeSort();
 		long startTime = System.nanoTime();
 		ob.sort(list, 0, list.size() - 1);
-		long endTime   = System.nanoTime();
+		long endTime = System.nanoTime();
 		long totalTime = endTime - startTime;
 
 		System.out.println("Middle element: " + list.get((int) Math.ceil(list.size() / 2.0)));
@@ -123,4 +122,3 @@ class MergeSort {
 
 	}
 }
-
